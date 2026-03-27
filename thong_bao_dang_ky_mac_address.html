@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thông Báo Đăng Ký MAC Address – Galaxy FinX JSC</title>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0a1628;
+    --navy2: #0f2040;
+    --blue: #1a6aff;
+    --blue-light: #3d8bff;
+    --cyan: #00c8e0;
+    --gold: #f5b800;
+    --white: #ffffff;
+    --gray: #94a3b8;
+    --gray-light: #e2e8f0;
+    --green: #00d68f;
+    --card-bg: #0d1f3c;
+    --border: rgba(26,106,255,0.25);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--navy);
+    font-family: 'Be Vietnam Pro', sans-serif;
+    color: var(--white);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Animated background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 50% at 20% 10%, rgba(26,106,255,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 80% 80%, rgba(0,200,224,0.08) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrapper {
+    position: relative;
+    z-index: 1;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 48px 24px 64px;
+  }
+
+  /* Header badge */
+  .dept-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(26,106,255,0.12);
+    border: 1px solid rgba(26,106,255,0.35);
+    border-radius: 100px;
+    padding: 6px 16px 6px 10px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--blue-light);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    animation: fadeDown 0.5s ease both;
+  }
+  .dept-badge .dot {
+    width: 7px; height: 7px;
+    background: var(--cyan);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--cyan);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
+
+  /* Logo / company name */
+  .company {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--gray);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    animation: fadeDown 0.5s 0.05s ease both;
+  }
+
+  /* Main title */
+  h1 {
+    font-size: clamp(28px, 5vw, 40px);
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 16px;
+    animation: fadeDown 0.5s 0.1s ease both;
+  }
+  h1 span {
+    background: linear-gradient(90deg, var(--blue-light), var(--cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .subtitle {
+    font-size: 15px;
+    color: var(--gray);
+    line-height: 1.7;
+    margin-bottom: 36px;
+    animation: fadeDown 0.5s 0.15s ease both;
+  }
+
+  /* Divider */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, var(--border), transparent);
+    margin-bottom: 36px;
+    animation: fadeIn 0.5s 0.2s ease both;
+  }
+
+  /* Info cards */
+  .cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 32px;
+    animation: fadeUp 0.5s 0.25s ease both;
+  }
+  @media(max-width: 500px){ .cards { grid-template-columns: 1fr; } }
+
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--blue), var(--cyan));
+    opacity: 0.6;
+  }
+  .card-icon {
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+  .card-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 6px;
+  }
+  .card-value {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--white);
+    line-height: 1.4;
+  }
+  .card-value.mono {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 16px;
+    color: var(--cyan);
+  }
+  .card-value.pass {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 15px;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+  }
+
+  /* Main content block */
+  .content-block {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 28px;
+    margin-bottom: 24px;
+    animation: fadeUp 0.5s 0.3s ease both;
+  }
+
+  .block-title {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--blue-light);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .block-title::before {
+    content: '';
+    display: inline-block;
+    width: 16px; height: 2px;
+    background: var(--blue-light);
+    border-radius: 2px;
+  }
+
+  .step-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .step-list li {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .step-num {
+    flex-shrink: 0;
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--blue), var(--blue-light));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700;
+    margin-top: 1px;
+  }
+  .step-text {
+    font-size: 14.5px;
+    color: #c8d8ef;
+    line-height: 1.6;
+  }
+  .step-text strong { color: var(--white); font-weight: 600; }
+  .step-text a {
+    color: var(--cyan);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0,200,224,0.35);
+    transition: border-color 0.2s;
+  }
+  .step-text a:hover { border-color: var(--cyan); }
+
+  /* Alert / note */
+  .alert {
+    background: rgba(245,184,0,0.07);
+    border: 1px solid rgba(245,184,0,0.3);
+    border-left: 3px solid var(--gold);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 24px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    animation: fadeUp 0.5s 0.35s ease both;
+  }
+  .alert-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+  .alert-text { font-size: 13.5px; color: #e2c87a; line-height: 1.6; }
+  .alert-text strong { color: var(--gold); }
+
+  /* Success note */
+  .success-note {
+    background: rgba(0,214,143,0.07);
+    border: 1px solid rgba(0,214,143,0.25);
+    border-left: 3px solid var(--green);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    animation: fadeUp 0.5s 0.4s ease both;
+  }
+  .success-note .alert-text { color: #7de8c5; }
+  .success-note .alert-text strong { color: var(--green); }
+
+  /* CTA Button */
+  .cta-wrap {
+    text-align: center;
+    animation: fadeUp 0.5s 0.45s ease both;
+  }
+  .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, var(--blue) 0%, #0055e0 100%);
+    color: var(--white);
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: none;
+    padding: 14px 32px;
+    border-radius: 100px;
+    box-shadow: 0 8px 32px rgba(26,106,255,0.35);
+    transition: transform 0.2s, box-shadow 0.2s;
+    letter-spacing: 0.02em;
+  }
+  .cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(26,106,255,0.5);
+  }
+  .cta-btn svg { flex-shrink: 0; }
+
+  /* Footer */
+  .footer {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    animation: fadeIn 0.5s 0.5s ease both;
+  }
+  .footer-left { font-size: 12px; color: rgba(148,163,184,0.6); }
+  .footer-right { font-size: 12px; color: rgba(148,163,184,0.4); }
+
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <div class="company">Vikki Bank - HDBank · IT Department</div>
+
+  <div class="dept-badge">
+    <span class="dot"></span>
+    Thông Báo Vikki Bank - HDBank
+  </div>
+
+  <h1>Đăng Ký <span>MAC Address</span><br>Để Kết Nối Mạng Nội Bộ</h1>
+
+  <p class="subtitle">
+    Để được cấp quyền truy cập mạng Wi-Fi nội bộ công ty, tất cả anh/chị cần đăng ký MAC Address của thiết bị với bộ phận IT. Vui lòng thực hiện theo hướng dẫn bên dưới.
+  </p>
+
+  <div class="divider"></div>
+
+  <div class="cards">
+    <div class="card">
+      <div class="card-icon">📡</div>
+      <div class="card-label">Tên mạng Wi-Fi</div>
+      <div class="card-value mono">Galaxy FinX JSC</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🔑</div>
+      <div class="card-label">Mật khẩu</div>
+      <div class="card-value pass">officenetwork</div>
+    </div>
+  </div>
+
+  <div class="alert">
+    <span class="alert-icon">⚠️</span>
+    <div class="alert-text">
+      <strong>Lưu ý quan trọng:</strong> Anh/chị nào đã có tên trong danh sách đăng ký thì <strong>không cần đăng ký lại</strong>. Vui lòng kiểm tra danh sách trước khi gửi thông tin.
+    </div>
+  </div>
+
+  <div class="content-block">
+    <div class="block-title">Các bước thực hiện</div>
+    <ol class="step-list">
+      <li>
+        <span class="step-num">1</span>
+        <span class="step-text">
+          <strong>Kiểm tra danh sách đã đăng ký</strong> — Mở link bên dưới và tìm tên mình trong danh sách. Nếu đã có rồi thì <strong>không cần làm gì thêm</strong>.
+        </span>
+      </li>
+      <li>
+        <span class="step-num">2</span>
+        <span class="step-text">
+          <strong>Tìm MAC Address của máy</strong> — Vào <strong>Settings → Network & internet → Wi-Fi → tên mạng đang kết nối</strong>, cuộn xuống tìm dòng <strong>Physical address (MAC)</strong>. Định dạng có thể là <code style="background:rgba(255,255,255,0.08);padding:1px 6px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:12px;">AA:BB:CC:DD:EE:FF</code> hoặc <code style="background:rgba(255,255,255,0.08);padding:1px 6px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:12px;">AA-BB-CC-DD-EE-FF</code>.
+        </span>
+      </li>
+      <li>
+        <span class="step-num">3</span>
+        <span class="step-text">
+          <strong>Điền thông tin vào sheet</strong> — Truy cập link đăng ký bên dưới và điền đầy đủ họ tên và MAC Address vào sheet.
+        </span>
+      </li>
+      <li>
+        <span class="step-num">4</span>
+        <span class="step-text">
+          <strong>Chờ IT xử lý</strong> — Sau khi đăng ký, bộ phận IT sẽ cập nhật quyền truy cập. Anh/chị có thể kết nối mạng <strong>Galaxy FinX JSC</strong> với mật khẩu <strong>officenetwork</strong>.
+        </span>
+      </li>
+    </ol>
+  </div>
+
+  <div class="success-note">
+    <span class="alert-icon">✅</span>
+    <div class="alert-text">
+      <strong>Sau khi được duyệt:</strong> Kết nối Wi-Fi tên <strong>Galaxy FinX JSC</strong> · Mật khẩu: <strong>officenetwork</strong>
+    </div>
+  </div>
+
+  <div class="cta-wrap">
+    <a href="https://docs.google.com/spreadsheets/d/1_1hc1N4KUml2Jn4ciqOu3DZQVUwbKY61/edit?gid=963184327#gid=963184327" target="_blank" class="cta-btn">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/>
+      </svg>
+      Xem Danh Sách &amp; Đăng Ký Ngay
+    </a>
+  </div>
+
+  <div class="footer">
+    <span class="footer-left">© Vikki Bank - HDBank · Bộ phận IT</span>
+    <span class="footer-right">Mọi thắc mắc liên hệ IT trực tiếp</span>
+  </div>
+
+</div>
+</body>
+</html>
